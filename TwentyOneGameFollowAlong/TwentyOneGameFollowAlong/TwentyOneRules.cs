@@ -31,23 +31,25 @@ namespace TwentyOneGameFollowAlong
             int aceCount = Hand.Count(x => x.Face == Face.Ace); // get the number of Aces
             // unique combinations of ACE (ace=1 or ace=11)   if 1,11 or 11,1 -- only count as 1 combination
             int[] result = new int[aceCount + 1]; // initialize the size of the array e.g., 1 Ace = 1,11 = 2 entries
-            int value = Hand.Sum(x => _cardValues[x.Face]); // get hand value assuming 1 or 0 aces with ACE val=1
-            result[0] = value;                              // if array len = 1, then we have no aces and we're done
-            if (result.Length == 1)
+            int baseValue = Hand.Sum(x => _cardValues[x.Face]); // get hand value where all aces count as 1
+            int aceValue = 0;                                   // used when counting Aces as 11
+            result[0] = baseValue;                              // if array len = 1, then we have no aces and we're done
+            if (result.Length == 1)  // if no Aces, then we are done, return
                 return result;
-            for (int i = 1; i < result.Length; i++)
+            for (int i = 1; i <= aceCount; i++)  // for each Ace...
             {
-                value += (i * 10);  // For each Ace, then add 10 * the position of the value
-                result[i] = value;  // On 1st Ace, value gets 10 added, on 2nd Ace, value gets 20 added and so on
+                aceValue = baseValue + (i * 10);  // add 10 to the base sum (count each Ace as 11 now )
+                result[i] = aceValue;  // On 1st Ace, value gets 10 added, on 2nd Ace, value gets 20 added and so on
             }
             return result;
         }
 
+        // Blackjack is defined as an Ace card and a Face card in a hand of two cards.
         public static bool CheckForBlackJack(List<Card> Hand)
         {
             int[] possibleValues = GetAllPossibleHandValues(Hand);
-            int value = possibleValues.Max(); // BUG!! could return value greater than 21 in a hand that has blackjack
-                                              // MAX of ACE,ACE,9 returns 31 even though 21 is possible
+            int value = possibleValues.Max(); 
+                                              
             if (value == 21) return true;
             else return false;
         }

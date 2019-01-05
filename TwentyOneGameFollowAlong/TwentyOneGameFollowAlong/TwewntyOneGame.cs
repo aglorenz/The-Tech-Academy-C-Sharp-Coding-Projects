@@ -24,7 +24,7 @@ namespace TwentyOneGameFollowAlong
                 player.Hand = new List<Card>();  // Give each player a new empty hand
                 player.Stay = false;             // and reset stay (false)
             }
-            Console.WriteLine("Place your bet!");
+            Console.WriteLine("\nPlace your bet!");
 
             foreach (Player player in Players)  // protects program to add players in the future
             {
@@ -39,7 +39,7 @@ namespace TwentyOneGameFollowAlong
             // Deal a hand to each player (2 cards) and the Dealer
             for (int i = 0; i < 2; i++)
             {
-                Console.WriteLine("Dealing...");
+                Console.WriteLine("\nDealing...");
                 foreach (Player player in Players)
                 {
                     Console.Write("{0}: ", player.Name);
@@ -78,7 +78,7 @@ namespace TwentyOneGameFollowAlong
             {
                 while (!player.Stay)
                 {
-                    Console.WriteLine("Your cards are:");
+                    Console.WriteLine("\nYour cards are:");
                     foreach (Card card in player.Hand)
                     {
                         Console.Write("{0} ", card.ToString());  // using a custom To.String we overrode in Card class
@@ -101,7 +101,7 @@ namespace TwentyOneGameFollowAlong
                         Dealer.Balance += Bets[player];
                         Console.WriteLine("{0} Busted! You lose your bet of {1}. Your balance is now {2}",
                             player.Name, Bets[player], player.Balance);
-                        Console.WriteLine("Do you want to play again?");
+                        Console.WriteLine("\nDo you want to play again?");
                         answer = Console.ReadLine().ToLower();
                         if (answer == "yes" || answer == "yeah" || answer == "ya" || answer == "y")
                         {
@@ -122,18 +122,18 @@ namespace TwentyOneGameFollowAlong
             // as long as dealer is not busted and does not want to stay, keep playing
             while (!Dealer.isBusted && !Dealer.Stay)
             {
-                Console.WriteLine("Dealer is hitting...");
+                Console.WriteLine("\nDealer is hitting...");
                 Dealer.Deal(Dealer.Hand);
                 Dealer.isBusted = TwentyOneRules.IsBusted(Dealer.Hand);
                 Dealer.Stay = TwentyOneRules.ShouldDealerStay(Dealer.Hand);
             }
             if (Dealer.Stay)
             {
-                Console.WriteLine("Dealer is staying.");
+                Console.WriteLine("\nDealer is staying.");
             }
             if (Dealer.isBusted)
             {
-                Console.WriteLine("Dealer is busted.");
+                Console.WriteLine("\nDealer is busted.");
                 // Give all the players their winnings
                 // loop through each Player and associated Bet
                 // Find players that match that name(where always returns a list, take the first one (only one is ever
@@ -170,10 +170,10 @@ namespace TwentyOneGameFollowAlong
                 }
                 else
                 {
-                    Console.WriteLine("Dealer wins{0}", Bets[player]);
+                    Console.WriteLine("Dealer wins{0} ", Bets[player]);
                     Dealer.Balance += Bets[player];
                 }
-                Console.WriteLine("Play again?");
+                Console.WriteLine("\nPlay again?");
                 string answer = Console.ReadLine().ToLower();
                 if (answer == "yes" || answer == "yeah" || answer == "ya" || answer == "y")
                 {
