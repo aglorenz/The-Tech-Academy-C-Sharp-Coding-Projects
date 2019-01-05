@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TwentyOneGameFollowAlong
 {
@@ -10,6 +11,13 @@ namespace TwentyOneGameFollowAlong
     {
         static void Main(string[] args)
         {
+            //string text = "Here is some text";
+            // file will be created or overwritten.  @ means read string exactly as written.  no escape chars needed
+            //File.WriteAllText(@"C:\users\andy\logs\log.txt",text); 
+            //string text = File.ReadAllText(@"C:\users\andy\logs\log.txt");
+
+
+
             Console.WriteLine("Welcome to the Grand Hotel and Casino. Let's start by telling me your name.");
             string playerName = Console.ReadLine();
 

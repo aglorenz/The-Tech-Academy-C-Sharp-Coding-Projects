@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TwentyOneGameFollowAlong
 {
@@ -17,8 +18,13 @@ namespace TwentyOneGameFollowAlong
         public void Deal(List<Card> Hand)
         {
             Hand.Add(Deck.Cards.First());
-            Console.WriteLine(Deck.Cards.First().ToString());
-            Deck.Cards.RemoveAt(0);
+            string card = string.Format(Deck.Cards.First().ToString());
+            Console.WriteLine(card);
+            using (StreamWriter file = new StreamWriter(@"c:\users\andy\logs\log.txt", true)) // true indicates append
+            {
+                file.WriteLine(card);
+            }  // once this reached, memory resources are disposed of
+                Deck.Cards.RemoveAt(0);
         }
     }
 }
