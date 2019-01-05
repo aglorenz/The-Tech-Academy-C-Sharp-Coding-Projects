@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwentyOneGameFollowAlong
+namespace Casino
 {
     public abstract class Game // Game is a *base* class AKA an abstract class.  An abstract class can never be 
                                // instantiated. It can never be an object. It's only meant to be inherited from. We 

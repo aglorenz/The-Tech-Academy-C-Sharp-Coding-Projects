@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwentyOneGameFollowAlong
+namespace Casino.Interfaces
 {
     // A class can inherit as many interfaces as it wants to, but it can only inherit ONE class.
     // Any class that inherits an interface must implement this method, take in said parm, and return void.

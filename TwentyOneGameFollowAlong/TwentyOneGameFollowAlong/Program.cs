@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Casino;
+using Casino.TwentyOne;
 using System.IO;
 
-namespace TwentyOneGameFollowAlong
+namespace TwentyOneGameFollowAlong 
 {
     class Program
     {
@@ -21,7 +19,8 @@ namespace TwentyOneGameFollowAlong
 
             //TimeSpan ageAtGraduation = yearOfGraduation - yearOfBirth;
             
-
+            // when not using the "using System"
+            //System.Console.WriteLine("Welcome to the Grand Hotel and Casino. Let's start by telling me your name.");
             Console.WriteLine("Welcome to the Grand Hotel and Casino. Let's start by telling me your name.");
             string playerName = Console.ReadLine();
 

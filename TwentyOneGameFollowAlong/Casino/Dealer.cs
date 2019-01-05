@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace TwentyOneGameFollowAlong
+namespace Casino
 {
-    public class Dealer
+    internal class Dealer
     {
         public string Name { get; set; }
         public Deck Deck { get; set; }  // Dealer *HAS* a deck not is a deck so we include it as a property rather than inherit the deck

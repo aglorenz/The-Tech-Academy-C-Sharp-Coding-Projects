@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Casino.Interfaces;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwentyOneGameFollowAlong
+namespace Casino.TwentyOne
 {
     // A class can inherit only one base class (Game).  But can inherit as many interfaces as necessary 
     public class TwentyOneGame : Game, IWalkAway
     {
-        public TwentyOneDealer Dealer { get; set; }
+        internal TwentyOneDealer Dealer { get; set; }
 
         public override void Play()
         {
@@ -49,7 +50,7 @@ namespace TwentyOneGameFollowAlong
                         bool blackJack = TwentyOneRules.CheckForBlackJack(player.Hand);
                         if (blackJack)
                         {
-                            Console.WriteLine("Blackjack! {0} wins {1}", player.Name, Bets[player]);
+                            Console.WriteLine("Blackjack! {0} wins {1}", player.Name, Bets[player] * 1.5);
                             player.Balance += Convert.ToInt32((Bets[player] * 1.5) + Bets[player]);
                             return;
                         }
