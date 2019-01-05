@@ -22,6 +22,7 @@ namespace TwentyOneGameFollowAlong
             Console.WriteLine(card);
             using (StreamWriter file = new StreamWriter(@"c:\users\andy\logs\log.txt", true)) // true indicates append
             {
+                file.WriteLine(DateTime.Now);
                 file.WriteLine(card);
             }  // once this reached, memory resources are disposed of
                 Deck.Cards.RemoveAt(0);

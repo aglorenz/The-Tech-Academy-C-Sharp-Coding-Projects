@@ -16,7 +16,11 @@ namespace TwentyOneGameFollowAlong
             //File.WriteAllText(@"C:\users\andy\logs\log.txt",text); 
             //string text = File.ReadAllText(@"C:\users\andy\logs\log.txt");
 
+            //DateTime yearOfBirth = new DateTime(1995, 5, 23, 8, 32, 45);
+            //DateTime yearOfGraduation = new DateTime(2013, 6, 1, 16, 34, 22);
 
+            //TimeSpan ageAtGraduation = yearOfGraduation - yearOfBirth;
+            
 
             Console.WriteLine("Welcome to the Grand Hotel and Casino. Let's start by telling me your name.");
             string playerName = Console.ReadLine();
