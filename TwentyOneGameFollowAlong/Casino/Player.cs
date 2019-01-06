@@ -8,6 +8,11 @@ namespace Casino
 {
     public class Player
     {
+        // Constructor chaining or creating a consructor call chain.
+        public Player(string name) : this(name, 100) // 100 is default balance if beginningBalance not provided
+        {
+        }
+
         // This is a constructor to create a Player that takes two parms.  We assign them to properties in the class.
         public Player(string name, int beginningBalance)
         {
@@ -22,6 +27,7 @@ namespace Casino
         public string Name { get; set; }
         public bool IsActivelyPlaying { get; set; }
         public bool Stay { get; set; }      // probably should go in a 21player class but for now keep here
+        public Guid Id { get; set; }
 
         public bool Bet(int amount)
         {
