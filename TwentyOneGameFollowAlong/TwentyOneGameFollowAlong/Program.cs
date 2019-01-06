@@ -35,13 +35,21 @@ namespace TwentyOneGameFollowAlong
 
             // declaring constants
             const string casinoName = "Grand Hotel and Casino";
-            Console.WriteLine("Welcome to the {0}. Let's start by telling me your name.", casinoName);
+            Console.Write("Welcome to the {0}. Let's start by telling me your name.\n>> ", casinoName);
             string playerName = Console.ReadLine();
 
-            Console.WriteLine("And how much money did you bring today?");
-            int bank = Convert.ToInt32(Console.ReadLine());
+            bool validAnswer = false;
+            int bank = 0;
+            while (!validAnswer)
+            {
+                Console.Write("\nAnd how much money did you bring today?\n>> ");
+                validAnswer = int.TryParse(Console.ReadLine(), out bank);
+                if (!validAnswer) Console.WriteLine("Please enter only digits with no decimal");
+            }
 
-            Console.WriteLine("Hello, {0}.  Would you like to join a game of 21 right now?", playerName);
+
+
+            Console.Write("\nHello, {0}.  Would you like to join a game of 21 right now?\n>> ", playerName);
             string answer = Console.ReadLine().ToLower();
             if (answer == "yes" || answer == "yeah" || answer == "ya" || answer == "y")
             {
@@ -56,13 +64,28 @@ namespace TwentyOneGameFollowAlong
                 player.IsActivelyPlaying = true;
                 while (player.IsActivelyPlaying && player.Balance > 0)
                 {
+                    try
+                    {
                     // Play one hand
                     game.Play(); // most everything will happen in the Play method to keep the main method clean
+                    }
+                    catch (FraudException) // more specific exceptions first
+                    {
+                        Console.WriteLine("\nSecurity! Kick this person out for cheating.");
+                        Console.ReadLine();
+                        return;
+                    }
+                    catch (Exception) // Generic exceptions are last
+                    {
+                        Console.WriteLine("\nAn error occurred. Please contact your System Administrator.");
+                        Console.ReadLine();
+                        return;
+                    }
                 }
                 game -= player;
                 Console.WriteLine("Thank you for playing!");
             }
-            Console.WriteLine("Feel free to look around the casino.  Bye for now.");
+            Console.WriteLine("\nFeel free to look around the casino.  Bye for now.");
             Console.Read();
             
         }

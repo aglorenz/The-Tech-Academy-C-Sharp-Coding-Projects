@@ -15,21 +15,32 @@ namespace Casino.TwentyOne
         public override void Play()
         {
             Dealer = new TwentyOneDealer(); // Create a dealer
-            Dealer.Hand = new List<Card>(); // Dealer gets an empty hand.
-            Dealer.Stay = false;
-            Dealer.Deck = new Deck();  // Refresh the deck every single round
-            Dealer.Deck.Shuffle();
-
             foreach (Player player in Players) // initialize players
             {
                 player.Hand = new List<Card>();  // Give each player a new empty hand
                 player.Stay = false;             // and reset stay (false)
             }
-            Console.WriteLine("\nPlace your bet!");
+                    
+            Dealer.Hand = new List<Card>(); // Dealer gets an empty hand.
+            Dealer.Stay = false;
+            Dealer.Deck = new Deck();  // Refresh the deck every single round
+            Dealer.Deck.Shuffle();
 
             foreach (Player player in Players)  // protects program to add players in the future
             {
-                int bet = Convert.ToInt32(Console.ReadLine());
+                bool validAnswer = false;
+                int bet = 0;
+                while (!validAnswer)
+                {
+                    Console.Write("\nPlace your bet!\n>> ");
+                    validAnswer = int.TryParse(Console.ReadLine(), out bet);
+                    if (!validAnswer) Console.WriteLine("Please enter only digits with no decimal");
+                }
+                if (bet < 0)
+                {
+                    throw new FraudException();
+                }
+
                 bool successfullyBet = player.Bet(bet);
                 if (!successfullyBet)  // not enough in bank to cover the bet
                 {
