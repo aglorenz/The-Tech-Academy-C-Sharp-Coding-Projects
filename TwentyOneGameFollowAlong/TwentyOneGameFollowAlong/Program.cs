@@ -3,6 +3,8 @@ using Casino;
 using Casino.TwentyOne;
 using System.IO;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace TwentyOneGameFollowAlong 
 {
@@ -38,6 +40,21 @@ namespace TwentyOneGameFollowAlong
             Console.Write("Welcome to the {0}. Let's start by telling me your name.\n>> ", casinoName);
             string playerName = Console.ReadLine();
 
+            if (playerName == "admin")
+            {
+                List<ExceptionEntity> Exceptions = ReadExceptions();
+                foreach (var exception in Exceptions)
+                {
+                    Console.Write(exception.Id + " | ");
+                    Console.Write(exception.ExceptionType + " | ");
+                    Console.Write(exception.ExceptionMessage + " | ");
+                    Console.Write(exception.TimeStamp + " | ");
+                    Console.WriteLine();
+                }
+                Console.ReadLine();
+                return;
+            }
+
             bool validAnswer = false;
             int bank = 0;
             while (!validAnswer)
@@ -47,15 +64,13 @@ namespace TwentyOneGameFollowAlong
                 if (!validAnswer) Console.WriteLine("Please enter only digits with no decimal");
             }
 
-
-
             Console.Write("\nHello, {0}.  Would you like to join a game of 21 right now?\n>> ", playerName);
             string answer = Console.ReadLine().ToLower();
             if (answer == "yes" || answer == "yeah" || answer == "ya" || answer == "y")
             {
                 Player player = new Player(playerName, bank);  // use constructor to create player
                 player.Id = Guid.NewGuid(); // Create a GUID  and assign to player
-                using (StreamWriter file = new StreamWriter(@"c:\users\andy\logs\log.txt", true)) // true indicates append
+                using (StreamWriter file = new StreamWriter(@"C:\users\andy\logs\TwentyOneLog.txt", true)) // true indicates append
                 {
                     file.WriteLine(player.Id);
                 }  // once this reached, memory resources are disposed of
@@ -69,15 +84,18 @@ namespace TwentyOneGameFollowAlong
                     // Play one hand
                     game.Play(); // most everything will happen in the Play method to keep the main method clean
                     }
-                    catch (FraudException) // more specific exceptions first
+                    catch (FraudException ex) // more specific exceptions first
                     {
-                        Console.WriteLine("\nSecurity! Kick this person out for cheating.");
+                        Console.WriteLine(ex.Message);
+                        //Console.WriteLine("\nSecurity! Kick this person out for cheating.");
+                        UpdateDbWithException(ex);
                         Console.ReadLine();
                         return;
                     }
-                    catch (Exception) // Generic exceptions are last
+                    catch (Exception ex) // Generic exceptions are last
                     {
                         Console.WriteLine("\nAn error occurred. Please contact your System Administrator.");
+                        UpdateDbWithException(ex);
                         Console.ReadLine();
                         return;
                     }
@@ -89,6 +107,82 @@ namespace TwentyOneGameFollowAlong
             Console.Read();
             
         }
-        
+
+        // only accessible inside of this class.  Static so we don't have to create a new instance of Program
+        // which will make it similar to main().  All Exceptions inherit from Exception so this method could
+        // take a Fraudexception polymorphism.  Wer'e using ADO.net to write to the db.
+        private static void UpdateDbWithException(Exception ex)
+        {
+            // need a connection string
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
+                                        Integrated Security=True;Connect Timeout=30;Encrypt=False;
+                                        TrustServerCertificate=False;ApplicationIntent=ReadWrite;
+                                        MultiSubnetFailover=False";
+            string queryString = "INSERT INTO Exceptions (ExceptionType, ExceptionMessage, TimeStamp) VALUES" +
+                                 " (@ExceptionType, @ExceptionMessage, @TimeStamp)";
+
+            /*  
+             *  using is a way of controlling unmanaged resources.  When inside of a program in the.net 
+             *  framework and the common language runtime, and you go outside of it to get something, such 
+             *  the file system, which is not controlled by the common language runtime (CLR), it's risky.  You are 
+             *  opening up resources which could use up memory and other things.  The CLR is worried about that.
+             *  Anytime you open up these connections, you have to close them.  So a shorthand is created to handle
+             *  this called "using".  Memory is freed up after the last closing curly brace.
+            */
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                
+                // by naming these datatypes, we are protecting against SQL injection
+                command.Parameters.Add("@ExceptionType", SqlDbType.VarChar);
+                command.Parameters.Add("@ExceptionMessage", SqlDbType.VarChar);
+                command.Parameters.Add("@TimeStamp", SqlDbType.DateTime);
+
+                command.Parameters["@ExceptionType"].Value = ex.GetType().ToString();
+                command.Parameters["@ExceptionMessage"].Value = ex.Message;
+                command.Parameters["@TimeStamp"].Value = DateTime.Now;
+
+                // send it to the database
+                connection.Open();
+                command.ExecuteNonQuery();  // a Query would be like a SELECT,  this is an INSERT statement
+                connection.Close();
+
+            }
+        }
+        private static List<ExceptionEntity> ReadExceptions()
+        {
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
+                                        Integrated Security=True;Connect Timeout=30;Encrypt=False;
+                                        TrustServerCertificate=False;ApplicationIntent=ReadWrite;
+                                        MultiSubnetFailover=False";
+
+            string queryString = "Select ID, ExceptionType, ExceptionMessage, TimeStamp " +
+                                 "From Exceptions";
+
+            List<ExceptionEntity> Exceptions = new List<ExceptionEntity>();
+
+            using  (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ExceptionEntity exception = new ExceptionEntity();
+                    exception.Id = Convert.ToInt32(reader["Id"]);
+                    exception.ExceptionType = reader["exceptionType"].ToString();
+                    exception.ExceptionMessage = reader["ExceptionMessage"].ToString();
+                    exception.TimeStamp = Convert.ToDateTime(reader["TimeStamp"]);
+                    Exceptions.Add(exception);
+                }
+                connection.Close();
+            }
+
+            return Exceptions;
+
+        }
     }
 }

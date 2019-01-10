@@ -20,7 +20,7 @@ namespace Casino
             Hand.Add(Deck.Cards.First());
             string card = string.Format(Deck.Cards.First().ToString());
             Console.WriteLine(card);
-            using (StreamWriter file = new StreamWriter(@"c:\users\andy\logs\log.txt", true)) // true indicates append
+            using (StreamWriter file = new StreamWriter(@"C:\users\andy\logs\TwentyOneLog.txt", true)) // true indicates append
             {
                 file.WriteLine(DateTime.Now);
                 file.WriteLine(card);

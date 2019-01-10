@@ -38,7 +38,8 @@ namespace Casino.TwentyOne
                 }
                 if (bet < 0)
                 {
-                    throw new FraudException();
+                    Console.WriteLine();
+                    throw new FraudException("Security! Kick this person out for cheating!");
                 }
 
                 bool successfullyBet = player.Bet(bet);
