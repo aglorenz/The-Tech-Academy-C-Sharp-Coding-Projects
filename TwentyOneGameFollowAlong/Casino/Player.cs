@@ -13,15 +13,22 @@ namespace Casino
         {
         }
 
-        // This is a constructor to create a Player that takes two parms.  We assign them to properties in the class.
+        // 
+        /// <summary>
+        /// This is a constructor to create a Player that takes two parms.  We assign them to properties in the class.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="beginningBalance"></param>
         public Player(string name, int beginningBalance)
         {
-            Hand = new List<Card>();
+            //Hand = new List<Card>();
             Balance = beginningBalance;
             Name = name;
         }
-        private List<Card> _hand = new List<Card>();
-        public List<Card> Hand { get { return _hand; } set { _hand = value; } }
+        //private List<Card> _hand = new List<Card>();
+        //public List<Card> Hand { get { return _hand; } set { _hand = value; } }
+
+        public List<Card> Hand { get; set; } = new List<Card>();
 
         public int Balance { get; set; }
         public string Name { get; set; }

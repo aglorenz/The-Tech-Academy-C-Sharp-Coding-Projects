@@ -59,6 +59,7 @@ namespace Casino.TwentyOne
                     Dealer.Deal(player.Hand);
                     if (i == 1) // if second card in initial deal
                     {
+
                         bool blackJack = TwentyOneRules.CheckForBlackJack(player.Hand);
                         if (blackJack)
                         {

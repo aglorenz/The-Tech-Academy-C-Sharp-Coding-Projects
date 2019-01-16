@@ -25,8 +25,15 @@ namespace Casino
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<Card> Cards { get; set; }
 
+        /// <summary>
+        /// test
+        /// </summary>
+        /// <param name="times"></param>
         public void Shuffle(int times = 1)
         {
             for (int i = 0; i < times; i++)

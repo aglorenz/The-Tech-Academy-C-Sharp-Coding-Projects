@@ -9,9 +9,16 @@ using System.Data;
 namespace TwentyOneGameFollowAlong 
 {
     class Program
+
     {
+        /// <summary>
+        /// TExst
+        /// </summary>
+        /// <param name="args">testing</param>
         static void Main(string[] args)
         {
+
+            
             //string text = "Here is some text";
             // file will be created or overwritten.  @ means read string exactly as written.  no escape chars needed
             //File.WriteAllText(@"C:\users\andy\logs\log.txt",text); 
