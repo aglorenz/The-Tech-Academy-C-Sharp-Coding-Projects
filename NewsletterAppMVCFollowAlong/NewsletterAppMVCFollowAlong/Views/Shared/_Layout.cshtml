@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Newsletter</title>
+    <!-- they generate scripts or CSS for us.  More useful in a large application  The server maps these to paths 
+        where CSS and JavaScript files are located and it does fancy type compilation to it. It renders multiple scripts and CSS
+        and shrinks (minifies) it to remove white space to make it easier to send it to the browser.  -->
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    @RenderBody()  <!-- this is where our index.cshtml is getting rendered-->
+
+    <!-- Bundle config files located in the App_Start folder-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false) <!-- related to specific JS files to avoid overhead -->
+</body>
+</html>

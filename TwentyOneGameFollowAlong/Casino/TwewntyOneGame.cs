@@ -53,6 +53,9 @@ namespace Casino.TwentyOne
             for (int i = 0; i < 2; i++)
             {
                 Console.WriteLine("\nDealing...");
+                var BlackJacks = Players.Where(x => TwentyOneRules.CheckForBlackJack(x.Hand)).ToList();
+                //Players.OrderByDescending(x => x.GetCardValueSum())
+
                 foreach (Player player in Players)
                 {
                     Console.Write("{0}: ", player.Name);
@@ -145,7 +148,7 @@ namespace Casino.TwentyOne
             {
                 Console.WriteLine("\nDealer is staying.");
             }
-            if (Dealer.isBusted)
+            else if (Dealer.isBusted)
             {
                 Console.WriteLine("\nDealer is busted.");
                 // Give all the players their winnings
@@ -168,6 +171,19 @@ namespace Casino.TwentyOne
             // 3) could have a tie
             foreach (Player player in Players)
             {
+
+                switch (TwentyOneRules.CompareHands(player.Hand, Dealer.Hand))
+                {
+                    case null:
+                        break;
+
+                    case true:
+                        break;
+
+                    case false:
+                        break;
+                }
+
                 // nullable boolean to allow for 3 choices
                 bool? playerWon = TwentyOneRules.CompareHands(player.Hand, Dealer.Hand); 
                 if (playerWon == null)
@@ -178,9 +194,12 @@ namespace Casino.TwentyOne
                 }
                 else if (playerWon == true)
                 {
+                    var test = $"Hello {1 + 1}";
+                    var test1 = string.Format("Hello {0}", 1 + 1);
+
                     Console.WriteLine("{0} won {1}!", player.Name, Bets[player]);
-                    player.Balance += (Bets[player] * 2); // return original bet plus winning amt (original bet)
-                    Dealer.Balance -= (Bets[player]);
+                    player.Balance += Bets[player] * 2; // return original bet plus winning amt (original bet)
+                    Dealer.Balance -= Bets[player];
                 }
                 else
                 {
@@ -189,6 +208,11 @@ namespace Casino.TwentyOne
                 }
                 Console.WriteLine("\nPlay again?");
                 string answer = Console.ReadLine().ToLower();
+
+                var test2 = new List<string> {"yes", "yeah", "ya", "y"}.Contains(answer);
+
+
+                player.IsActivelyPlaying = answer == "yes" || answer == "yeah" || answer == "ya" || answer == "y";
                 if (answer == "yes" || answer == "yeah" || answer == "ya" || answer == "y")
                 {
                     player.IsActivelyPlaying = true;

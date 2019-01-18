@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Casino
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// <see cref="float"/> testing
+    /// </remarks>
     public class Player
     {
         // Constructor chaining or creating a consructor call chain.
@@ -28,7 +35,7 @@ namespace Casino
         //private List<Card> _hand = new List<Card>();
         //public List<Card> Hand { get { return _hand; } set { _hand = value; } }
 
-        public List<Card> Hand { get; set; } = new List<Card>();
+        public List<Card> Hand { get; private set; } = new List<Card>();
 
         public int Balance { get; set; }
         public string Name { get; set; }

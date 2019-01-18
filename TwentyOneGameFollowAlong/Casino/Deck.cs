@@ -8,6 +8,12 @@ namespace Casino
 {
     public class Deck
     {
+        #region Test
+
+        #endregion
+
+        
+
         public Deck()
         {
             Cards = new List<Card>();
@@ -17,9 +23,11 @@ namespace Casino
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    Card card = new Card();
-                    card.Face = (Face)i; // casting j, which is an int, to enum type Face!
-                    card.Suit = (Suit)j; // Casting i, which is an int, to enum type Suit!
+                    Card card = new Card
+                    {
+                        Face = (Face)i, // casting j, which is an int, to enum type Face!
+                        Suit = (Suit)j // Casting i, which is an int, to enum type Suit!
+                    };
                     Cards.Add(card);     // Add the card to the Cards list
                 }
             }
@@ -28,7 +36,7 @@ namespace Casino
         /// <summary>
         /// 
         /// </summary>
-        public List<Card> Cards { get; set; }
+        public List<Card> Cards { get; private set; }
 
         /// <summary>
         /// test
@@ -41,7 +49,7 @@ namespace Casino
                 List<Card> TempList = new List<Card>();
                 Random random = new Random();
 
-                while (Cards.Count > 0)
+                while (Cards.Any())
                 {
                     int randomIndex = random.Next(0, Cards.Count);
                     TempList.Add(Cards[randomIndex]);
