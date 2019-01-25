@@ -1,0 +1,19 @@
+﻿@using CarInsuranceMVCApp.ViewModels;
+@model QuoteVm
+
+<div class="row no-gutters m-3">
+    <div class="card col-10 mx-auto shadow">
+        <div class="card-header text-center">
+            <h3 class="m-0"><strong>@Model.FirstName, Here Is Your Car Insurance Quote</strong></h3>
+        </div>
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="form-group col-md-12" style="text-align: center">
+                    <h4><strong>$@Model.MonthlyPremium Per Month</strong></h4>
+                </div>
+                    <br />
+                    Click&nbsp;@Html.ActionLink("here", "Index", "Home")&nbsp;for another quote.
+            </div>
+        </div>
+    </div>
+</div>

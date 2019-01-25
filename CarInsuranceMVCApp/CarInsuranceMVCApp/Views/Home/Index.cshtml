@@ -1,0 +1,71 @@
+﻿<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-7 col-xl-6 mx-auto shadow">
+        <div class="card-header text-center">
+            <h5 class="m-0"><strong>Please Fill In All Fields For A Free Quote</strong></h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Quote", "Home", FormMethod.Post))
+            {
+                <div class="row no-gutters">
+                    <div class="form-group col-md-12">
+                        <strong>First Name</strong>
+                        <input name="FirstName" type="text" class="form-control" placeholder="First Name" 
+                               autofocus required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Last Name</strong>
+                        <input name="LastName" type="text" class="form-control" placeholder="Last Name" 
+                               required />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>E-mail</strong>
+                        <input name="EmailAddress" type="email" class="form-control" 
+                               placeholder="E-mail Address" required />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Date of Birth</strong>
+                        <input name="DateOfBirth" type="date" class="form-control" required />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Make of Car</strong>
+                        <input name="MakeOfCar" type="text" class="form-control" 
+                               placeholder="Example: Honda, Chevrolet" required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Model of Car</strong>
+                        <input name="ModelOfCar" type="text" class="form-control" 
+                               placeholder="Example: Civic, Corvette" required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Model Year of Car</strong>
+                        <input name="ModelYear" type="number" class="form-control"
+                               min="1885" max="@(DateTime.Now.Year+1)" 
+                               placeholder="Between 1885 and @(DateTime.Now.Year+1)." 
+                               title="Enter a year between 1885 and @(DateTime.Now.Year+1)" required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Ever had a DUI?</strong>
+                        <select class="form-control" name="DUI">
+                            <option>No</option>
+                            <option>Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Number of Speeding Tickets  (Enter 0 if none)</strong>
+                        <input name="NumSpeedingTickets" type="number" class="form-control" min="0" 
+                               title="Enter digits only" required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <strong>Desired Coverage</strong>
+                        <div class="form-control">
+                            Full <input name="CoverageType" type="radio" value="Full" checked />
+                            &nbsp;&nbsp;&nbsp;
+                            Liability <input name="CoverageType" type="radio" value="Liability" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

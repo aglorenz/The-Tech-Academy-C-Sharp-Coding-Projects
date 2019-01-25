@@ -1,0 +1,16 @@
+﻿table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    /*border-radius: 1em;*/
+    border: 1px solid #ddd;
+}
+/* Table header and table row styling*/
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+/* differentiate table rows with alternating grey/white background*/
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
