@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="row no-gutters">
                 <div class="form-group col-md-12" style="text-align: center">
-                    <h4><strong>$@Model.MonthlyPremium Per Month</strong></h4>
+                    <h4><strong>@Model.MonthlyPremium.ToString("c2") Per Month</strong></h4>
                 </div>
                     <br />
                     Click&nbsp;@Html.ActionLink("here", "Index", "Home")&nbsp;for another quote.

@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "CarInsuranceReport", "CarInsuranceReport\CarInsuranceReport.rptproj", "{A54379C3-8881-4AC4-B316-E34BD81351C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.Debug|Default.ActiveCfg = Debug
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.Debug|Default.Build.0 = Debug
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.Debug|Default.Deploy.0 = Debug
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.DebugLocal|Default.Build.0 = DebugLocal
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.Release|Default.ActiveCfg = Release
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.Release|Default.Build.0 = Release
+		{A54379C3-8881-4AC4-B316-E34BD81351C3}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BBA816F-7019-41B2-AB42-28B5D77FED5B}
+	EndGlobalSection
+EndGlobal

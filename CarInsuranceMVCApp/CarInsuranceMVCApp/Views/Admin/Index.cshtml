@@ -3,7 +3,7 @@
     <br />
     <div class="card  col-10 mx-auto shadow">
         <div class="card-header text-center">
-            <h3 class="m-0"><strong>Car Insurance Quotes</strong></h3>
+            <h3 class="m-0"><strong>Admin Page:  Car Insurance Quotes</strong></h3>
         </div>
         <div style="overflow-x:auto;" class="card-body">
             <table>
@@ -19,7 +19,7 @@
                         <td>@quote.FirstName</td>
                         <td>@quote.LastName</td>
                         <td>@quote.EmailAddress</td>
-                        <td>$@quote.MonthlyPremium</td>
+                        <td>@quote.MonthlyPremium.ToString("c2")</td>
                     </tr>
                 }
             </table>
