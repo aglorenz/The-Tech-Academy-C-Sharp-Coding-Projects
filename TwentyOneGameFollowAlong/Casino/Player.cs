@@ -16,9 +16,9 @@ namespace Casino
     public class Player
     {
         // Constructor chaining or creating a consructor call chain.
-        public Player(string name) : this(name, 100) // 100 is default balance if beginningBalance not provided
-        {
-        }
+        //XXXX look here for a new way to do this ***** public Player(string name) : this(name, 100) // 100 is default balance if beginningBalance not provided
+        //{
+        //}
 
         // 
         /// <summary>
@@ -26,16 +26,19 @@ namespace Casino
         /// </summary>
         /// <param name="name"></param>
         /// <param name="beginningBalance"></param>
+        public Player(string name) : this(name, 100)
+        {
+        }
         public Player(string name, int beginningBalance)
         {
-            //Hand = new List<Card>();
+            Hand = new List<Card>();  // maybe comment this out XXXX
             Balance = beginningBalance;
             Name = name;
         }
-        //private List<Card> _hand = new List<Card>();
-        //public List<Card> Hand { get { return _hand; } set { _hand = value; } }
+        private List<Card> _hand = new List<Card>();
+        public List<Card> Hand { get { return _hand; } set { _hand = value; } }
 
-        public List<Card> Hand { get; private set; } = new List<Card>();
+        //public List<Card> Hand { get; private set; } = new List<Card>();
 
         public int Balance { get; set; }
         public string Name { get; set; }

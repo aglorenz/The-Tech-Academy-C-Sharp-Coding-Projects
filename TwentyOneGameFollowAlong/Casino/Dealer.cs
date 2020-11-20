@@ -7,7 +7,9 @@ using System.IO;
 
 namespace Casino
 {
-    internal class Dealer
+    internal class Dealer  // internal can only b e accessed by methods of the same assembly (i.e., Casino)
+                           // it's good practice to declare accessibility to be exactly what you need it to be
+                           // e.g., helper methods aren't meant to be exposed publicly
     {
         public string Name { get; set; }
         public Deck Deck { get; set; }  // Dealer *HAS* a deck not is a deck so we include it as a property rather than inherit the deck

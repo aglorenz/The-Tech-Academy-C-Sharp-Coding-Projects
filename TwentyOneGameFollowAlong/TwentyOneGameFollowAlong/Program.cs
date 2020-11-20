@@ -37,18 +37,20 @@ namespace TwentyOneGameFollowAlong
 
             // Using var.  Rule of thumb:  if ever the data type is in question, don't use var.  not so good for
             // readability.
-            var newPlayer = new Player("Andy"); // implicitly define variable.  Useful to avoid a lot of typing
-            Dictionary<string, string> myDictionary = new Dictionary<string, string>();
+            //var newPlayer = new Player("Andy"); // implicitly define variable.  Useful to avoid a lot of typing
+            
+            //Dictionary<string, string> myDictionary = new Dictionary<string, string>();
             //or
-            var myDictionary1 = new Dictionary<string, string>();
+            //var myDictionary1 = new Dictionary<string, string>();  // saves typing
 
-            // declaring constants
+            // declaring constants - they can not change
             const string casinoName = "Grand Hotel and Casino";
             Console.Write("Welcome to the {0}. Let's start by telling me your name.\n>> ", casinoName);
             string playerName = Console.ReadLine();
 
-            if (playerName == "admin")
+            if (playerName.ToLower() == "admin")
             {
+                // Create list of exceptions from the database
                 List<ExceptionEntity> Exceptions = ReadExceptions();
                 foreach (var exception in Exceptions)
                 {
@@ -58,7 +60,7 @@ namespace TwentyOneGameFollowAlong
                     Console.Write(exception.TimeStamp + " | ");
                     Console.WriteLine();
                 }
-                Console.ReadLine();
+                Console.Read();
                 return;
             }
 
@@ -80,6 +82,7 @@ namespace TwentyOneGameFollowAlong
                 using (StreamWriter file = new StreamWriter(@"C:\users\andy\logs\TwentyOneLog.txt", true)) // true indicates append
                 {
                     file.WriteLine(player.Id);
+
                 }  // once this reached, memory resources are disposed of
                 Game game = new TwentyOneGame();  // polymorphism happening here
                 game += player; // using overloaded operators in Game to add player to the list, players
@@ -93,7 +96,7 @@ namespace TwentyOneGameFollowAlong
                     }
                     catch (FraudException ex) // more specific exceptions first
                     {
-                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);  // written here instead of below.  Allows for easy change of message
                         //Console.WriteLine("\nSecurity! Kick this person out for cheating.");
                         UpdateDbWithException(ex);
                         Console.ReadLine();
@@ -108,7 +111,7 @@ namespace TwentyOneGameFollowAlong
                     }
                 }
                 game -= player;
-                Console.WriteLine("Thank you for playing!");
+                Console.WriteLine("\nYour balance is {0}.  Thank you for playing!", player.Balance);
             }
             Console.WriteLine("\nFeel free to look around the casino.  Bye for now.");
             Console.Read();
@@ -120,13 +123,19 @@ namespace TwentyOneGameFollowAlong
         // take a Fraudexception polymorphism.  Wer'e using ADO.net to write to the db.
         private static void UpdateDbWithException(Exception ex)
         {
+            // other database connection string
+            //string connectionString    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
+            //                            Integrated Security=True;Connect Timeout=30;Encrypt=False;
+            //                            TrustServerCertificate=False;ApplicationIntent=ReadWrite;
+            //                            MultiSubnetFailover=False";
+
             // need a connection string
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
-                                        Integrated Security=True;Connect Timeout=30;Encrypt=False;
+            string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=TwentyOneGame;
+                                        Integrated Security=True; Connect Timeout=30;Encrypt=False;
                                         TrustServerCertificate=False;ApplicationIntent=ReadWrite;
                                         MultiSubnetFailover=False";
-            string queryString = "INSERT INTO Exceptions (ExceptionType, ExceptionMessage, TimeStamp) VALUES" +
-                                 " (@ExceptionType, @ExceptionMessage, @TimeStamp)";
+            string queryString = @"INSERT INTO Exceptions (ExceptionType, ExceptionMessage, TimeStamp) VALUES 
+                                  (@ExceptionType, @ExceptionMessage, @TimeStamp)";
 
             /*  
              *  using is a way of controlling unmanaged resources.  When inside of a program in the.net 
@@ -156,7 +165,40 @@ namespace TwentyOneGameFollowAlong
 
             }
         }
-        private static List<ExceptionEntity> ReadExceptions()
+        ///////////////////////////////////
+        // Write an exception to the database
+        ////////////////////////////////////////
+        private static void UpdateDBWithException(Exception ex)
+        {
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
+                                        Integrated Security=True;Connect Timeout=30;Encrypt=False;
+                                        TrustServerCertificate=False;ApplicationIntent=ReadWrite;
+                                        MultiSubnetFailover=False";
+
+            string queryString = "Select ID, ExceptionType, ExceptionMessage, TimeStamp " +
+                                 "From Exceptions";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add("@ExceptionType", SqlDbType.VarChar);
+                command.Parameters.Add("@ExceptionMessage", SqlDbType.VarChar);
+                command.Parameters.Add("@TimeStamp", SqlDbType.DateTime);
+
+                command.Parameters["@ExceptionType"].Value = ex.GetType().ToString();
+                command.Parameters["@ExceptionMessage"].Value = ex.Message;
+                command.Parameters["@TimeStamp"].Value = DateTime.Now;
+
+                connection.Open();
+                command.ExecuteNonQuery();   //non query i.e., we are storing data into the database
+
+            }
+
+        }
+        /////////////////////////
+        // Read all the exceptions from the database into a list to be later displayed for the admin
+        ////////////////////////
+        private static List<ExceptionEntity> ReadExceptions() 
         {
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
                                         Integrated Security=True;Connect Timeout=30;Encrypt=False;
@@ -168,22 +210,23 @@ namespace TwentyOneGameFollowAlong
 
             List<ExceptionEntity> Exceptions = new List<ExceptionEntity>();
 
-            using  (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+
                 SqlCommand command = new SqlCommand(queryString, connection);
 
                 connection.Open();
 
-                SqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();  // reading data from the database according to query string 
 
                 while (reader.Read())
                 {
-                    ExceptionEntity exception = new ExceptionEntity();
+                    ExceptionEntity exception = new ExceptionEntity();  // entity means we are mapping to a database row
                     exception.Id = Convert.ToInt32(reader["Id"]);
                     exception.ExceptionType = reader["exceptionType"].ToString();
                     exception.ExceptionMessage = reader["ExceptionMessage"].ToString();
                     exception.TimeStamp = Convert.ToDateTime(reader["TimeStamp"]);
-                    Exceptions.Add(exception);
+                    Exceptions.Add(exception);  // Add the exception to the list
                 }
                 connection.Close();
             }
