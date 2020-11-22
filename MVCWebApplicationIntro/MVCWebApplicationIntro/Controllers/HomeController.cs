@@ -22,7 +22,7 @@ namespace MVCWebApplicationIntro.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Hello, Andy";
+            ViewBag.Message = "Welcome, Andy";
 
             return View();
         }
