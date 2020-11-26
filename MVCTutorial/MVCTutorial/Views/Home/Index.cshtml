@@ -1,0 +1,33 @@
+﻿@*@using System.Collections.Generic*@
+@*reference the datatype*@
+@*@model List<string>*@
+
+@* Reference what I passed in to the view with the word Model.  Note there is nothing in the Models folder. Don't
+    have to have something in that folder for my application to be operating in MVC  Model is the data we are working with*@
+@*@foreach (var name in Model)
+    {
+        <h1>
+            @name
+        </h1>
+    }*@
+
+@*@model int*@
+
+@*<h1>
+    @Model
+</h1>*@
+
+@model MVCTutorial.Models.User
+
+<h1>
+    @Model.Id
+</h1>
+<h1>
+    @Model.FirstName
+</h1>
+<h1>
+    @Model.LastName
+</h1>
+<h1>
+    @Model.Age
+</h1>
