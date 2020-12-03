@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MVCNewsLetterApp.Models;
+using MVCNewsLetterApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,6 +12,7 @@ namespace MVCNewsLetterApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Newsletter;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public ActionResult Index()
         {
             return View();
@@ -24,7 +27,6 @@ namespace MVCNewsLetterApp.Controllers
             }
             else
             {
-                string connectionString= @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
                 //Now we will connect to our database with ADO.net
                 //Using parameters helps prevent SQL injection
                 string queryString = @"INSERT INTO SignUps (FirstName, LastName, EmailAddress) 
@@ -48,18 +50,48 @@ namespace MVCNewsLetterApp.Controllers
                     return View("Success");
             }
         }
-        public ActionResult About()
+
+        public ActionResult Admin()
         {
-            ViewBag.Message = "Your application description page.";
+            
+            string queryString = @"SELECT Id, FirstName, LastName, EmailAddress, SocialSecurityNumber FROM SignUps";
+            List<NewsletterSignUp> signups = new List<NewsletterSignUp>();
 
-            return View();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var signup = new NewsletterSignUp();
+                    signup.Id = Convert.ToInt32(reader["Id"]);
+                    signup.FirstName = reader["FirstName"].ToString();
+                    signup.LastName = reader["LastName"].ToString();
+                    signup.EmailAddress = reader["EmailAddress"].ToString();
+                    signup.SocialSecurityNumber = reader["SocialSecurityNumber"].ToString(); // wwe don't want to return this
+
+                    signups.Add(signup);
+                }
+            }
+
+            var signupVms = new List<SignupVm>();  // best practice if its obvious what the data type is
+            //List<SignupVm> signupVms = new List<SignupVm>();
+
+            foreach (var signup in signups)
+            {
+                var signupVm = new SignupVm();
+                signupVm.FirstName = signup.FirstName;
+                signupVm.LastName = signup.LastName;
+                signupVm.EmailAddress = signup.EmailAddress;
+                signupVms.Add(signupVm);
+            }
+
+            return View(signupVms);
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }
