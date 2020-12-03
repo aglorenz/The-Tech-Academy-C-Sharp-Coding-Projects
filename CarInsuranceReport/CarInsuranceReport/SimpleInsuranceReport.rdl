@@ -6,7 +6,7 @@
     <DataSource Name="CarInsurance">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CarInsurance</ConnectString>
+        <ConnectString>Data Source=MOLOKAI\SQLEXPRESS;Initial Catalog=CarInsurance</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
