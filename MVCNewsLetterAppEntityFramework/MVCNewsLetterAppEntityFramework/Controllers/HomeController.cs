@@ -12,7 +12,9 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Newsletter;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        // not used now that we are using Entity Framework.  We are using NewsletterEntities as the connex str.  Its in Web.config now
+        // and was automatically added when we imported the data model ADO.NET Entity Data Model
+        //private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Newsletter;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public ActionResult Index()
         {
             return View();
@@ -62,32 +64,7 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
             }
         }
 
-        public ActionResult Admin()
-        {
 
-            using (NewsletterEntities db = new NewsletterEntities()) // this instantiation gives us access to the database
-            {
-
-                //this is the EntityFramework method
-                
-                // as the db grows we will make more specific calls to the database to narrow our list, but for now, we grab all records
-                var signups = db.SignUps;  // represents all the records in the database  This maps to Signups in Newsletter.Context.cs
-                var signupVms = new List<SignupVm>();  // var is best practice if its obvious what the data type is
-                //List<SignupVm> signupVms = new List<SignupVm>();
-
-                // Map our database object to a view model ( so we don't pass personal info to the view)
-                foreach (var signup in signups)
-                {
-                    var signupVm = new SignupVm();
-                    signupVm.FirstName = signup.FirstName;
-                    signupVm.LastName = signup.LastName;
-                    signupVm.EmailAddress = signup.EmailAddress;
-                    signupVms.Add(signupVm);
-                }
-
-                return View(signupVms); // pass the list or records to the view
-            }
-        }
 
                 // Below is the old ADO.NET method.  Notice its longer than the 
                 //string queryString = @"SELECT Id, FirstName, LastName, EmailAddress, SocialSecurityNumber FROM SignUps";
