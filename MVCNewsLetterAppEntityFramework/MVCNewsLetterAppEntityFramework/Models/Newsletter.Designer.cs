@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Andy\Source\Repos\The-Tech-Academy-C-Sharp-Coding-Projects\MVCNewsLetterAppEntityFramework\MVCNewsLetterAppEntityFramework\Newsletter.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Andy\Source\Repos\The-Tech-Academy-C-Sharp-Coding-Projects\MVCNewsLetterAppEntityFramework\MVCNewsLetterAppEntityFramework\Models\Newsletter.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

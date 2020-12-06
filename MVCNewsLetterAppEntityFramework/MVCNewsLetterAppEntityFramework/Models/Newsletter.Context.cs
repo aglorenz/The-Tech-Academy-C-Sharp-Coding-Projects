@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVCNewsLetterAppEntityFramework
+namespace MVCNewsLetterAppEntityFramework.Models
 {
     using System;
     using System.Data.Entity;

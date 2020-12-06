@@ -12,17 +12,27 @@
         <div class="card-body">
             @foreach (var signup in Model)
             {
-                <div class="row">
-                    <div class="col">
-                        @signup.FirstName
+                // Razor helper method Unsubscribe method in the Admin controller using the Post FormMethod
+                using (Html.BeginForm("Unsubscribe", "Admin", FormMethod.Post))
+                {
+                    <input type="hidden" name="Id" value="@signup.Id" /> 
+                    <div class="row mb-1">
+                        <div class="col-2">
+                            @signup.FirstName
+                        </div>
+                        <div class="col">
+                            @signup.LastName
+                        </div>
+                        <div class="col-4">
+                            @signup.EmailAddress
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn-sm btn-outline-danger btn-block">
+                                Unsubscribe
+                            </button>
+                        </div>
                     </div>
-                    <div class="col">
-                        @signup.LastName
-                    </div>
-                    <div class="col">
-                        @signup.EmailAddress
-                    </div>
-                </div>
+                }
             }
         </div>
     </div>
