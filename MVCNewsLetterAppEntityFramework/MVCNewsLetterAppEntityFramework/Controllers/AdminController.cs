@@ -21,7 +21,8 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
                 // as the db grows we will make more specific calls to the database to narrow our list, but for now, we grab all records
                 //var signups = db.SignUps;  // represents all the records in the database  This maps to Signups in Newsletter.Context.cs
                 //var signups = db.SignUps.Where(x => x.Removed == null).ToList();  // using lambda expression to get the rows still subscribed
-                // Here we use another way, LINQ (Language INtegrated Query), to get the rows
+                
+                // Here we use another way, LINQ (Language INtegrated Query), to get the rows that haven't been unsubscribed
                 var signups = (from rows in db.SignUps
                                where rows.Removed == null
                                select rows).ToList();
@@ -39,7 +40,7 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
                     signupVms.Add(signupVm);
                 }
 
-                return View(signupVms); // pass the list or records to the view
+                return View(signupVms); // pass the list or records to the view to be displayed
             }
         }
 

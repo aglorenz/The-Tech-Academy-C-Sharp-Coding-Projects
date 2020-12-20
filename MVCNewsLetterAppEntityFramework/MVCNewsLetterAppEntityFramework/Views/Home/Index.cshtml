@@ -4,6 +4,8 @@
             <h5 class="m-0">Sign up to our newlsletter</h5>
         </div>
         <div class="card-body">
+            @*When we click submit, the server collects the input from the form and sends it to Signup Action method*@
+            @*The mapping of these fields to the parameters in the action method is called Model Binding*@
             @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
             {
                 <div class="row no-gutters">

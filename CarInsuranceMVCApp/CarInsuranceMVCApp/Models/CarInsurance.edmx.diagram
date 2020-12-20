@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="849d20480d984a64b4700924990eb28e" Name="Diagram1">
-        <EntityTypeShape EntityType="CarInsuranceModel.Quote" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarInsuranceModel.Quote" Width="2.625" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

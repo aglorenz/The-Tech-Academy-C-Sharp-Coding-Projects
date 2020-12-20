@@ -15,17 +15,30 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
         // not used now that we are using Entity Framework.  We are using NewsletterEntities as the connex str.  Its in Web.config now
         // and was automatically added when we imported the data model ADO.NET Entity Data Model
         //private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Newsletter;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        
+        /// <summary>
+        ///  Displays the view housing the signup form
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// After user clicks submit, take the data from the signup form and post it to the database.
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="emailAddress"></param>
+        /// <returns>Success View</returns>
         [HttpPost]
         public ActionResult SignUp(string firstName, string lastName, string emailAddress)
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress))
             {
-                return View("~/Views/Shared/Error.cshtml");
+                //return null; // do this when unit testing
+                return View("~/Views/Shared/Error.cshtml"); // ~ means relative at the root
             }
             else
             {
@@ -93,6 +106,10 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
 
                 //-----------------------------------------------------------------------------------
                 //--------------- Above part is the ADO.NET extra code needed above what EF needs -------------------------
+                //-----------------------------------------------------------------------------------
+
+                //-----------------------------------------------------------------------------------
+                // --------------- Below  we map our database object to a viewModel
                 //-----------------------------------------------------------------------------------
 
                 //    var signupVms = new List<SignupVm>();  // var is best practice if its obvious what the data type is
