@@ -12,7 +12,8 @@
         <div class="card-body">
             @foreach (var signup in Model)
             {
-                // Razor helper method Unsubscribe method in the Admin controller using the Post FormMethod
+                // Use a form.  When button clicked, it calls a controller and passes the id of the row
+                // Razor helper method. Unsubscribe method in the Admin controller using the Post FormMethod
                 using (Html.BeginForm("Unsubscribe", "Admin", FormMethod.Post))
                 {
                     <input type="hidden" name="Id" value="@signup.Id" /> 
