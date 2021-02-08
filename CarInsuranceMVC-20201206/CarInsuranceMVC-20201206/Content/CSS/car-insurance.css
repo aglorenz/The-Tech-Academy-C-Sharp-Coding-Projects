@@ -1,0 +1,10 @@
+﻿body {
+}
+
+main {
+    background: url('../images/Alfa.jpg') repeat center;
+}
+
+.bg-alfa-green {
+    background-color: #e1e4cf;
+}
