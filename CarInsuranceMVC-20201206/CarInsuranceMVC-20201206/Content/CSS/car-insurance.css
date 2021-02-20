@@ -2,9 +2,53 @@
 }
 
 main {
-    background: url('../images/Alfa.jpg') repeat center;
+    /*background: url('../images/Alfa.jpg') repeat center;*/
 }
 
-.bg-alfa-green {
-    background-color: #e1e4cf;
+:root {
+    --alfa-green: #ecece5;
+    --alfa-red: #ad3064;
+    --alfa-dk-red: #a14a66;
 }
+
+div.cci-jumbotron {
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--alfa-dk-red);
+    position: relative;
+    background-color: transparent;
+}
+/*
+    This pseudo element is a cool way to change the opacity of a background image for the jumbotron
+    while maintining the opacity of the overlying text.
+*/
+div.cci-jumbotron::after {
+    content: "";
+    background-image: url('../images/alfa-wall.jpg');
+    opacity: 0.45;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+div.cci-alfa {
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--alfa-dk-red);
+    padding: 0rem;
+}
+
+/* override styling for the bootstrap jumbotron */
+.jumbotron img {
+    width: 100%;
+}
+
+.jumbotron p {
+    color: var(--alfa-dk-red);
+    font-size: 1.50rem;
+    font-weight: 400;
+}
+
