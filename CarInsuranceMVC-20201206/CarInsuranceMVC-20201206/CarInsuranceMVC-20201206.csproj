@@ -363,6 +363,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties scripts_4umd_4popper_1js_1map__JsonSchema="" scripts_4umd_4popper-utils_1min_1js_1map__JsonSchema="" scripts_4esm_4popper-utils_1min_1js_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
