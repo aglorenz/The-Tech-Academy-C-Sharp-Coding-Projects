@@ -57,10 +57,10 @@
                 <div class="col">
                     @Html.EditorFor(model => model.CarYear, new { htmlAttributes =
                         new { @class = "form-control",
-                            @value=2000,
-                            @placeholder=DateTime.Now.Year,
-                            @min="1885",
-                            @max = DateTime.Now.Year+3,
+                            /*@Value must be uppercase so it shows in the input field rather than just being assigned to the model*/
+                            @Value = DateTime.Now.Year,
+                            @min = "1885",
+                            @max = DateTime.Now.Year + 3,
                             required = true
                         } })
                     @Html.ValidationMessageFor(model => model.CarYear, "", new { @class = "text-danger" })
