@@ -11,13 +11,16 @@ namespace CarInsuranceMVC_20201206.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Insuree
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public System.DateTime DateOfBirth { get; set; }
         public int CarYear { get; set; }
         public string CarMake { get; set; }
