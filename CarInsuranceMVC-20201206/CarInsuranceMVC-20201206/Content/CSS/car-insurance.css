@@ -7,6 +7,7 @@ main {
 
 :root {
     --alfa-green: #ecece5;
+    --alfa-dk-green: #d1d6c7;
     --alfa-red: #ad3064;
     --alfa-dk-red: #a14a66;
 }
@@ -52,3 +53,32 @@ div.cci-alfa {
     font-weight: 400;
 }
 
+.btn-primary {
+    color: #000;
+    background-color: var(--alfa-dk-green);
+    border-color: var(--alfa-red);
+}
+
+.btn-primary:focus {
+    color: #000;
+    background-color: var(--alfa-dk-green);
+    border-color: var(--alfa-red);
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: var(--alfa-dk-red);
+    border-color: var(--alfa-dk-red);
+}
+
+.btn-primary:active {
+    color: #fff;
+    background-color: var(--alfa-dk-red);
+    border-color: var(--alfa-dk-red);
+    }
+
+.form-control:focus, .btn:focus {
+    box-shadow: 4px 5px 4px var(--alfa-dk-green);
+    /*outline: none;*/
+    border-color: var(--alfa-dk-red);
+}
