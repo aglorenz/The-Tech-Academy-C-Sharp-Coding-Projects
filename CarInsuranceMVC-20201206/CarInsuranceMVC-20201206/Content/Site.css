@@ -16,6 +16,17 @@
     white-space: normal;
 }
 
+
+/* Added by Andy: Might have deleted before. */
+/* Supress validation messages when there are no errors */
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 /*input,
 select,
