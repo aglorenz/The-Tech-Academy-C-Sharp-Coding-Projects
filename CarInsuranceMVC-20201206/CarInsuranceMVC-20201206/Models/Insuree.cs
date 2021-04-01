@@ -20,12 +20,16 @@ namespace CarInsuranceMVC_20201206.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "This field is required.")]
         public System.DateTime DateOfBirth { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
         public int CarYear { get; set; }
         public string CarMake { get; set; }
         public string CarModel { get; set; }
         public bool DUI { get; set; }
+        //[Display(Name = "Basic Name")]
+        [Required(ErrorMessage = "This field is required.")]
+        [Range(0,Int32.MaxValue)]
         public int SpeedingTickets { get; set; }
         public bool CoverageType { get; set; }
         public decimal Quote { get; set; }

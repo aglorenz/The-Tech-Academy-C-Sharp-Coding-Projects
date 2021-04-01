@@ -8,7 +8,8 @@ main {
 :root {
     --alfa-green: #ecece5;
     --alfa-dk-green: #d1d6c7;
-    --alfa-red: #ad3064;
+    --alfa-charcoal-red: #7b0d30c2;
+    --alfa-red: #d21d67;
     --alfa-dk-red: #a14a66;
 }
 
@@ -26,7 +27,7 @@ div.cci-jumbotron {
 div.cci-jumbotron::after {
     content: "";
     background-image: url('../images/alfa-wall.jpg');
-    opacity: 0.45;
+    opacity: 0.55;
     top: 0;
     left: 0;
     bottom: 0;
@@ -53,21 +54,22 @@ div.cci-alfa {
     font-weight: 400;
 }
 
+/* override colors for Bootstrap buttons */
 .btn-primary {
-    color: #000;
+    color: #000;  
     background-color: var(--alfa-dk-green);
-    border-color: var(--alfa-red);
+    border-color: var(--alfa-dk-red);
 }
 
 .btn-primary:focus {
     color: #000;
     background-color: var(--alfa-dk-green);
-    border-color: var(--alfa-red);
+    border-color: var(--alfa-dk-red);
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: var(--alfa-dk-red);
+    background-color: var(--alfa-charcoal-red);
     border-color: var(--alfa-dk-red);
 }
 
@@ -82,3 +84,11 @@ div.cci-alfa {
     /*outline: none;*/
     border-color: var(--alfa-dk-red);
 }
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+}
+
+/*input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+}*/

@@ -33,9 +33,9 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
         /// <param name="emailAddress"></param>
         /// <returns>Success View</returns>
         [HttpPost]
-        public ActionResult SignUp(string fiirstName, string lastName, string emailAddress)
+        public ActionResult SignUp(string firstName, string lastName, string emailAddress)
         {
-            if (string.IsNullOrEmpty(fiirstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress))
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress))
             {
                 //return null; // do this when unit testing
                 return View("~/Views/Shared/Error.cshtml"); // ~ means relative at the root
@@ -46,7 +46,7 @@ namespace MVCNewsLetterAppEntityFramework.Controllers
                 using (NewsletterEntities db = new NewsletterEntities())
                 {
                     var signup = new SignUp();
-                    signup.FirstName = fiirstName;
+                    signup.FirstName = firstName;
                     signup.LastName = lastName;
                     signup.EmailAddress = emailAddress;
 

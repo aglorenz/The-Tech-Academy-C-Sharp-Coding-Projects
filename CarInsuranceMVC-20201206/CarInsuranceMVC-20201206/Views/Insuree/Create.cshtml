@@ -51,8 +51,9 @@
                 @Html.LabelFor(model => model.DateOfBirth, "Date of Birth", htmlAttributes: new { @class = "control-label col" })
                 <div class="col">
                     @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new 
-                        { @class = "form-control", @type = "date", required = true, @max = @DateTime.Now } })
-                    @Html.ValidationMessageFor(model => model.DateOfBirth, "This field is required.", new { @class = "text-danger" })
+                        { @class = "form-control", @type = "date", required = true, 
+                          @max = @DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") } })
+                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -72,8 +73,7 @@
                                 required = true
                             }
                         })
-                    @* Override the default message, "The CarYear field is required." with generic message (place it in the quotes) *@
-                    @Html.ValidationMessageFor(model => model.CarYear, "This field is required.", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.CarYear, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group col-sm-4">
@@ -93,23 +93,26 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-lg-4">
+            <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.SpeedingTickets, "Speeding Tickets", htmlAttributes: new { @class = "control-label col" })
                 <div class="col">
                     @*@Html.TextBox("MyTextbox", new { @title = "I'm a Tooltip!" })*@
                     @Html.EditorFor(model => model.SpeedingTickets, new { htmlAttributes = new { @class = "form-control", 
-                        @title = "Enter the number of speeding tickets you've received.  Enter 0 if none.", @min = 0 } })
+                         @min = 0 } })
                     @* Override the default message "The SpeedingTickets field is required." with generic message *@
-                    @Html.ValidationMessageFor(model => model.SpeedingTickets, "This field is required.", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.SpeedingTickets, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group col-sm-4">
             @Html.LabelFor(model => model.DUI, "DUI?", htmlAttributes: new { @class = "control-label col" })
                 <div class="col">
                     <div class="form-control">
-                        @*@Html.RadioButtonFor(model => model.DUI, "true") @Html.LabelFor(model => model.DUI, "Yes")*@
+                        @Html.RadioButtonFor(model => model.DUI, "true") 
+                            @Html.LabelFor(model => model.DUI, "Yes")
                         &nbsp;
-                        @Html.RadioButtonFor(model => model.DUI, "false") @Html.LabelFor(model => model.DUI, "No")
+                        @*special id and for = "" needed so that click on label will set the radio button for no instead of yes*@
+                        @Html.RadioButtonFor(model => model.DUI, "false", new { @id = "DUINo" }) 
+                            @Html.LabelFor(model => model.DUI, "No", new { @for = "DUINo" })
                     </div>
                     @Html.ValidationMessageFor(model => model.DUI, "This field is required.", new { @class = "text-danger" })
                 </div>
@@ -118,19 +121,23 @@
             @Html.LabelFor(model => model.CoverageType, "Full Coverage?", htmlAttributes: new { @class = "control-label col" })
                 <div class="col">
                     <div class="form-control">
-                        @Html.RadioButtonFor(model => model.CoverageType, "true") @Html.LabelFor(model => model.CoverageType, "Yes")
+                        @Html.RadioButtonFor(model => model.CoverageType, "true")
+                        @Html.LabelFor(model => model.CoverageType, "Yes")
                         &nbsp;
-                        @Html.RadioButtonFor(model => model.CoverageType, "false") @Html.LabelFor(model => model.CoverageType, "No")
+                        @*special id and for = "" needed so that click on label will set the radio button for no instead of yes*@
+                        @Html.RadioButtonFor(model => model.CoverageType, "false", new { @id = "CovTypeNo" })
+                        @Html.LabelFor(model => model.CoverageType, "No", new { @for = "CovTypeNo" })
                     </div>
                     @Html.ValidationMessageFor(model => model.CoverageType, "This field is required.", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
-
-        <div class="form-group">
-            <div class="col-sm-2 text-center">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </div>
 
