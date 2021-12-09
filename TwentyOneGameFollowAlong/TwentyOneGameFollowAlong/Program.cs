@@ -123,17 +123,13 @@ namespace TwentyOneGameFollowAlong
         // take a Fraudexception polymorphism.  Wer'e using ADO.net to write to the db.
         private static void UpdateDbWithException(Exception ex)
         {
-            // other database connection string
-            //string connectionString    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
-            //                            Integrated Security=True;Connect Timeout=30;Encrypt=False;
-            //                            TrustServerCertificate=False;ApplicationIntent=ReadWrite;
-            //                            MultiSubnetFailover=False";
 
             // need a connection string
-            string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=TwentyOneGame;
-                                        Integrated Security=True; Connect Timeout=30;Encrypt=False;
-                                        TrustServerCertificate=False;ApplicationIntent=ReadWrite;
-                                        MultiSubnetFailover=False";
+            string connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = TwentyOneGame; 
+                                        Integrated Security = True; Connect Timeout = 30; Encrypt = False; 
+                                        TrustServerCertificate = False; ApplicationIntent = ReadWrite; 
+                                        MultiSubnetFailover = False";
+
             string queryString = @"INSERT INTO Exceptions (ExceptionType, ExceptionMessage, TimeStamp) VALUES 
                                   (@ExceptionType, @ExceptionMessage, @TimeStamp)";
 
@@ -165,36 +161,7 @@ namespace TwentyOneGameFollowAlong
 
             }
         }
-        ///////////////////////////////////
-        // Write an exception to the database
-        ////////////////////////////////////////
-        private static void UpdateDBWithException(Exception ex)
-        {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TwentyOneGame;
-                                        Integrated Security=True;Connect Timeout=30;Encrypt=False;
-                                        TrustServerCertificate=False;ApplicationIntent=ReadWrite;
-                                        MultiSubnetFailover=False";
 
-            string queryString = "Select ID, ExceptionType, ExceptionMessage, TimeStamp " +
-                                 "From Exceptions";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.Add("@ExceptionType", SqlDbType.VarChar);
-                command.Parameters.Add("@ExceptionMessage", SqlDbType.VarChar);
-                command.Parameters.Add("@TimeStamp", SqlDbType.DateTime);
-
-                command.Parameters["@ExceptionType"].Value = ex.GetType().ToString();
-                command.Parameters["@ExceptionMessage"].Value = ex.Message;
-                command.Parameters["@TimeStamp"].Value = DateTime.Now;
-
-                connection.Open();
-                command.ExecuteNonQuery();   //non query i.e., we are storing data into the database
-
-            }
-
-        }
         /////////////////////////
         // Read all the exceptions from the database into a list to be later displayed for the admin
         ////////////////////////
