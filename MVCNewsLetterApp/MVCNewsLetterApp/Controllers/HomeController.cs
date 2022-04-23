@@ -54,7 +54,7 @@ namespace MVCNewsLetterApp.Controllers
         public ActionResult Admin()
         {
             
-            string queryString = @"SELECT Id, FirstName, LastName, EmailAddress, SocialSecurityNumber FROM SignUps";
+            string queryString = @"SELECT Id, FirstName, LastName, EmailAddress, Removed FROM SignUps";
             List<NewsletterSignUp> signups = new List<NewsletterSignUp>();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -72,7 +72,7 @@ namespace MVCNewsLetterApp.Controllers
                     signup.FirstName = reader["FirstName"].ToString();
                     signup.LastName = reader["LastName"].ToString();
                     signup.EmailAddress = reader["EmailAddress"].ToString();
-                    signup.SocialSecurityNumber = reader["SocialSecurityNumber"].ToString(); // wwe don't want to return this
+                    signup.Removed = reader["Removed"].ToString(); // wwe don't want to return this
 
                     signups.Add(signup);
                 }
