@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CarInsuranceMVC_20201206.Models;
+using CarInsuranceMVC_20201206.Services;
 
 namespace CarInsuranceMVC_20201206.Controllers
 {
@@ -50,6 +51,7 @@ namespace CarInsuranceMVC_20201206.Controllers
         {
             if (ModelState.IsValid)
             {
+                insuree.Quote = QuoteServices.CalculateQuote(insuree);
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +84,7 @@ namespace CarInsuranceMVC_20201206.Controllers
         {
             if (ModelState.IsValid)
             {
+                insuree.Quote = QuoteServices.CalculateQuote(insuree);
                 db.Entry(insuree).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

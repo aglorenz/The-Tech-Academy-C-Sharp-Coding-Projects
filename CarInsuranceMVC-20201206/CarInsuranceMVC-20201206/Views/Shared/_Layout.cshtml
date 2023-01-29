@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Cascade Car Insurance</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/CSS/car-insurance.css" rel="stylesheet" type="text/css" />
 
@@ -24,7 +25,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("List Quotes", "Index", "Admin")</li>
+                    <li>@Html.ActionLink("Create Quote", "Create", "Insuree")</li>
                 </ul>
             </div>
         </div>

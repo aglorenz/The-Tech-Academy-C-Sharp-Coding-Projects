@@ -7,7 +7,8 @@ main {
 
 :root {
     --alfa-green: #ecece5;
-    --alfa-dk-green: #d1d6c7;
+    /*--alfa-dk-green: #d1d6c7;*/
+    --alfa-dk-green: #b9c5a5;
     --alfa-charcoal-red: #7b0d30c2;
     --alfa-red: #d21d67;
     --alfa-dk-red: #a14a66;
@@ -26,7 +27,7 @@ div.cci-jumbotron {
 */
 div.cci-jumbotron::after {
     content: "";
-    background-image: url('../images/alfa-wall.jpg');
+    background: var(--alfa-dk-green); /* didn't like the repeating img I had before */
     opacity: 0.55;
     top: 0;
     left: 0;
@@ -44,6 +45,10 @@ div.cci-alfa {
 }
 
 /* override styling for the bootstrap jumbotron */
+
+.jumbotron {
+    padding: 2rem 0rem;
+}
 .jumbotron img {
     width: 100%;
 }
@@ -85,8 +90,23 @@ div.cci-alfa {
     border-color: var(--alfa-dk-red);
 }
 
+input,
+select,
+textarea {
+    max-width: none;
+}
+
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 50px white inset;
+}
+
+/* Supress validation messages when there are no errors */
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
 }
 
 /*input:-webkit-autofill:focus {
