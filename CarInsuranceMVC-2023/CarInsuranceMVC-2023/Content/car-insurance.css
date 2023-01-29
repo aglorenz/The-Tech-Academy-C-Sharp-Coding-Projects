@@ -1,0 +1,122 @@
+﻿body {
+}
+
+main {
+    /*background: url('../images/Alfa.jpg') repeat center;*/
+}
+
+:root {
+    --alfa-green: #ecece5;
+    /*--alfa-dk-green: #d1d6c7;*/
+    --alfa-dk-green: #b9c5a5;
+    --alfa-charcoal-red: #7b0d30c2;
+    --alfa-red: #d21d67;
+    --alfa-dk-red: #a14a66;
+}
+
+div.cci-jumbotron {
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--alfa-dk-red);
+    position: relative;
+    background-color: transparent;
+}
+    /*
+    This pseudo element is a cool way to change the opacity of a background image for the jumbotron
+    while maintining the opacity of the overlying text.
+*/
+    div.cci-jumbotron::after {
+        content: "";
+        background: var(--alfa-dk-green); /* didn't like the repeating img I had before */
+        opacity: 0.55;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+    }
+
+div.cci-alfa {
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--alfa-dk-red);
+    padding: 0rem;
+}
+
+/* override styling for the bootstrap jumbotron */
+
+.jumbotron {
+    padding: 2rem 0rem;
+}
+
+    .jumbotron img {
+        width: 100%;
+    }
+
+    .jumbotron p {
+        color: var(--alfa-dk-red);
+        font-size: 1.50rem;
+        font-weight: 400;
+    }
+
+/* override colors for Bootstrap buttons */
+.btn-primary {
+    color: #000;
+    background-color: var(--alfa-dk-green);
+    border-color: var(--alfa-dk-red);
+}
+
+    .btn-primary:focus {
+        color: #000;
+        background-color: var(--alfa-dk-green);
+        border-color: var(--alfa-dk-red);
+    }
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: var(--alfa-charcoal-red);
+        border-color: var(--alfa-dk-red);
+    }
+
+    .btn-primary:active {
+        color: #fff;
+        background-color: var(--alfa-dk-red);
+        border-color: var(--alfa-dk-red);
+    }
+
+.form-control:focus, .btn:focus {
+    box-shadow: 4px 5px 4px var(--alfa-dk-green);
+    /*outline: none;*/
+    border-color: var(--alfa-dk-red);
+}
+/* Override Site.css width of input fields so they take full with of boostrap column */
+input,
+select,
+textarea {
+    max-width: none;
+}
+
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 50px white inset;
+    }
+
+/* Override Site.css width of input fields so they take full with of boostrap column */
+input,
+select,
+textarea {
+    max-width: none;
+}
+
+/* Supress validation messages when there are no errors */
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+}*/

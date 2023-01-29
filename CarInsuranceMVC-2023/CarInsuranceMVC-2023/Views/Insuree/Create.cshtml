@@ -1,0 +1,165 @@
+﻿@model CarInsuranceMVC_2023.Models.Insuree
+
+@{
+    ViewBag.Title = "Get Quote";
+}
+
+<div class="jumbotron text-center cci-jumbotron">
+    <h1>Cascade Car Insurance</h1>
+    <p><i>Enter your information for a free quote!</i></p>
+</div>
+@*
+    Features added
+    * clicking text to select corresponding radio button
+    * custom validation message when default value is provided on view refresh and then deleted on Car Year field
+*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-horizontal">*@
+    <h4>Insuree</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", required = true, autofocus = true } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.EmailAddress, "Email Address", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control", @type = "email", required = true } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.DateOfBirth, "Date of Birth", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.DateOfBirth, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                   @type = "date",
+                   required = true,
+                   @max = @DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")
+               }
+           })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(model => model.CarYear, "Car Year", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.CarYear, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                        @*Value must be uppercase so it appears in the input field rather than just being assigned to the model*@
+                   @Value = DateTime.Now.Year,
+                   @min = "1885",
+                   @max = DateTime.Now.Year + 3,
+                   required = true
+               }
+           })
+                @Html.ValidationMessageFor(model => model.CarYear, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(model => model.CarMake, "Car Make", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.CarMake, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.CarMake, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(model => model.CarModel, "Car Model", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @Html.EditorFor(model => model.CarModel, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.CarModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(model => model.SpeedingTickets, "Speeding Tickets", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                @*@Html.TextBox("MyTextbox", new { @title = "I'm a Tooltip!" })*@
+                @Html.EditorFor(model => model.SpeedingTickets, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                   @min = 0
+               }
+           })
+                @* Override the default message "The SpeedingTickets field is required." with generic message *@
+                @Html.ValidationMessageFor(model => model.SpeedingTickets, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(model => model.DUI, "DUI?", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                <div class="form-control">
+                    @Html.RadioButtonFor(model => model.DUI, "true")
+                    @Html.LabelFor(model => model.DUI, "Yes")
+                    &nbsp;
+                    @*special id and for = "" needed so that click on label will set the radio button for no instead of yes*@
+                    @Html.RadioButtonFor(model => model.DUI, "false", new { @id = "DUINo" })
+                    @Html.LabelFor(model => model.DUI, "No", new { @for = "DUINo" })
+                </div>
+                @Html.ValidationMessageFor(model => model.DUI, "This field is required.", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(model => model.CoverageType, "Full Coverage?", htmlAttributes: new { @class = "control-label col" })
+            <div class="col">
+                <div class="form-control">
+                    @Html.RadioButtonFor(model => model.CoverageType, "true")
+                    @Html.LabelFor(model => model.CoverageType, "Yes")
+                    &nbsp;
+                    @*special id and for = "" needed so that click on label will set the radio button for no instead of yes*@
+                    @Html.RadioButtonFor(model => model.CoverageType, "false", new { @id = "CovTypeNo" })
+                    @Html.LabelFor(model => model.CoverageType, "No", new { @for = "CovTypeNo" })
+                </div>
+                @Html.ValidationMessageFor(model => model.CoverageType, "This field is required.", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
