@@ -1,21 +1,20 @@
 ﻿@model CarInsuranceMVC_2023.Models.Insuree
 
 @{
-    ViewBag.Title = "Get Quote";
+    ViewBag.Title = "Edit Quote";
 }
 
-@*
-    Features added
-    * clicking text to select corresponding radio button
-    * custom validation message when default value is provided on view refresh and then deleted on Car Year field
-*@
+<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+    <h4>Insuree</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
 
     <div class="form-row">
         <div class="form-group col-sm-6">
@@ -70,11 +69,11 @@
                {
                    @class = "form-control",
                         @*Value must be uppercase so it appears in the input field rather than just being assigned to the model*@
-                   @Value = DateTime.Now.Year,
-                   @min = "1885",
-                   @max = DateTime.Now.Year + 3,
-                   required = true
-               }
+                    @Value = DateTime.Now.Year,
+                    @min = "1885",
+                    @max = DateTime.Now.Year + 3,
+                    required = true
+                }
            })
                 @Html.ValidationMessageFor(model => model.CarYear, "", new { @class = "text-danger" })
             </div>
@@ -146,14 +145,16 @@
         <div class="row">
             <div class="col text-right ">
                 <input type="submit" value="Create" class="btn btn-primary mr-2" />
-                @Html.ActionLink("Cancel", "Index", "Home", null, new {@class="btn btn-primary" })
+                @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
 }
-    <div>
-    </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

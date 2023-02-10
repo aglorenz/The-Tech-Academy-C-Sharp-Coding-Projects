@@ -10,6 +10,9 @@ namespace CarInsuranceMVC_2023.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.JumbotronMessage = "We Insure Specialty Cars";
+            ViewBag.Button = @"<p class=""text - center""><a href=""/Insuree/Create"" class=""btn btn-secondary"">Click for Free Quote</a></p>";
+
             return View();
         }
 

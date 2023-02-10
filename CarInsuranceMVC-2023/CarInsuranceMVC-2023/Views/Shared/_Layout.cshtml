@@ -7,29 +7,39 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <!-----------------------------------------------  NAVBAR --------------------------------------------->
+    <nav id="navbar" class="container navbar navbar-expand-md fixed-top navbar-light" style="background-color: #fff;">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Get Quote", "Create", "Insuree")</li>
-                    <li>@Html.ActionLink("List Quotes", "Index", "Admin")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @*<img id="logo" src="img/Andrew Sig - BLK.png" alt="Logo" width="130" height="30">*@
+            <!-- <img src="img/Andrew Sig Wide BLK.png" alt="" width="150" height="25"> -->
+            <!-- <img src="img/Andrew Sig Wide Fancy WHT.png" alt="" width="150" height="25"> -->
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        @*<a class="nav-link" href="@Url.Action("Index", "Home")"><span class="sr-only">(current)</span></a>*@
+                    </li>
+                    <li class="nav-item">@Html.ActionLink("Get Quote", "Create", "Insuree", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("List Quotes (Admin)", "Index", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("List Details (Admin)", "List", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
+    <!-- /Navigation -->
+
     <div class="container body-content">
+        <div class="jumbotron text-center cci-jumbotron">
+            <h1>Cascade Car Insurance</h1>
+            <p><i>@ViewBag.JumbotronMessage</i></p>
+            @Html.Raw(@ViewBag.Button)
+        </div>
         @RenderBody()
         <hr />
         <footer>

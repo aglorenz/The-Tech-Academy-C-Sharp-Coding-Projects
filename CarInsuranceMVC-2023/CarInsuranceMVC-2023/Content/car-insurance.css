@@ -6,7 +6,7 @@ main {
 }
 
 :root {
-    --alfa-green: #ecece5;
+    --alfa-green: #d9dfce;
     /*--alfa-dk-green: #d1d6c7;*/
     --alfa-dk-green: #b9c5a5;
     --alfa-charcoal-red: #7b0d30c2;
@@ -18,24 +18,24 @@ div.cci-jumbotron {
     border-width: 3px;
     border-style: solid;
     border-color: var(--alfa-dk-red);
-    position: relative;
-    background-color: transparent;
+/*    position: relative;*/
+    background-color: var(--alfa-green);
 }
     /*
     This pseudo element is a cool way to change the opacity of a background image for the jumbotron
     while maintining the opacity of the overlying text.
 */
-    div.cci-jumbotron::after {
+    /*div.cci-jumbotron::after {
         content: "";
-        background: var(--alfa-dk-green); /* didn't like the repeating img I had before */
-        opacity: 0.55;
+        background: var(--alfa-dk-green);*/ /* didn't like the repeating img I had before */
+        /*opacity: 0.55;
         top: 0;
         left: 0;
         bottom: 0;
         right: 0;
         position: absolute;
         z-index: -1;
-    }
+    }*/
 
 div.cci-alfa {
     border-width: 3px;
@@ -45,6 +45,16 @@ div.cci-alfa {
 }
 
 /* override styling for the bootstrap jumbotron */
+
+.navbar {
+/*    max-height: 50px;*/
+    border: #fff solid 2px;
+    border-radius: .3rem;
+}
+
+.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+    color: rgba(0, 0, 0, 0.9);
+}
 
 .jumbotron {
     padding: 2rem 0rem;
@@ -63,13 +73,13 @@ div.cci-alfa {
 /* override colors for Bootstrap buttons */
 .btn-primary {
     color: #000;
-    background-color: var(--alfa-dk-green);
+    background-color: var(--alfa-green);
     border-color: var(--alfa-dk-red);
 }
 
     .btn-primary:focus {
         color: #000;
-        background-color: var(--alfa-dk-green);
+        background-color: var(--alfa-green);
         border-color: var(--alfa-dk-red);
     }
 
@@ -101,12 +111,6 @@ textarea {
         -webkit-box-shadow: 0 0 0 50px white inset;
     }
 
-/* Override Site.css width of input fields so they take full with of boostrap column */
-input,
-select,
-textarea {
-    max-width: none;
-}
 
 /* Supress validation messages when there are no errors */
 .field-validation-valid {

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<CarInsuranceMVC_2023.Models.Insuree>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Insuree Details";
 }
 
-<h2>Index</h2>
+<h2>Insuree Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "Insuree")
 </p>
 <table class="table">
     <tr>
@@ -84,7 +84,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
