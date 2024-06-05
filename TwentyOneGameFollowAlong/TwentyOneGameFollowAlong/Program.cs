@@ -79,7 +79,7 @@ namespace TwentyOneGameFollowAlong
             {
                 Player player = new Player(playerName, bank);  // use constructor to create player
                 player.Id = Guid.NewGuid(); // Create a GUID  and assign to player
-                using (StreamWriter file = new StreamWriter(@"C:\users\andy\logs\TwentyOneLog.txt", true)) // true indicates append
+                using (StreamWriter file = new StreamWriter(@"C:\users\stude\logs\TwentyOneLog.txt", true)) // true indicates append
                 {
                     file.WriteLine(player.Id);
 

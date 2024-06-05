@@ -156,10 +156,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Newsletter.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SignUp.cs">
       <DependentUpon>Newsletter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SignupVm.cs" />
   </ItemGroup>
   <ItemGroup>
